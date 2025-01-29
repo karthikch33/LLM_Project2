@@ -107,7 +107,7 @@ main::-webkit-scrollbar{
 .form-group {  
   display: flex;  
   align-items: center;  
-  margin: 15px 0;  
+  margin: 5px 0;  
   width: 100%;  
   justify-content: center;  
 }  
@@ -123,8 +123,32 @@ main::-webkit-scrollbar{
   margin-left: 10px;  
 }  
 
+.form-control2 {  
+  padding: 10px;  
+  /* margin-left: 10px;   */
+}  
+
 .error {  
   color: red;  
   margin-left: 10px;  
   font-size: 12px;  
 }
+
+
+.circle {  
+  display: inline-block;  
+  width: 12px;        
+  height: 12px;       
+  border-radius: 50%; 
+  margin-right: 8px;  
+}  
+
+.green {  
+  background-color: green; 
+  margin-bottom: 10px; 
+}  
+
+.red {  
+  background-color: red; 
+  margin-bottom: 10px; 
+}  

@@ -1,7 +1,6 @@
 import './App.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Connections from './components/pages/Connections/SideBar/Connections';
-import ConnectionForm from './components/pages/Connections/Form/ConnectionForm';
 import FlatFile from './components/pages/Connections/FlatFile/flatFile';
 import Layouter from './components/pages/WorkSpace/SideBar/Layouter';
 import Project from './components/pages/Project/SideBar/Project';
@@ -14,6 +13,7 @@ import MySqlForm from './components/pages/Connections/Forms/MySqlForm';
 import HanaForm from './components/pages/Connections/Forms/HanaForm';
 import ErpForm from './components/pages/Connections/Forms/ErpForm';
 import OracleForm from './components/pages/Connections/Forms/OracleForm';
+import ViewConnection from './components/pages/Connections/ViewConnections/ViewConnection';
 
 
 function App() {
@@ -39,6 +39,7 @@ function App() {
               <Route path='erp' element={<ErpForm/>}/>
               <Route path='oracle' element={<OracleForm/>}/>
               <Route path='flatfile' element={<FlatFile/>} />
+              <Route path='view-connections' element={<ViewConnection/>} />
             </Route>
 
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button} from 'antd';  
 import { useFormik } from "formik";
 import * as yup from 'yup'
+import { Alert } from 'antd';
 
 import 'bootstrap/dist/css/bootstrap.min.css';  
 
@@ -16,6 +17,7 @@ const MySqlForm = () => {
 
     const formik = useFormik({
         initialValues:{
+            connectionname:"",
             host:"",
             username:"",
             password:""
@@ -38,12 +40,10 @@ const MySqlForm = () => {
                 const data = await response;
      
                 console.log('Success:', data);
-                // Optionally handle success (e.g., show a message or redirect)
                 alert("Connection Successful");
             } catch (error) {
                 console.error('Error:', error);
                 alert("Connection Failed");
-                // Optionally handle error (e.g., show an error message)
             }
         }
     })
@@ -52,8 +52,23 @@ const MySqlForm = () => {
     return (  
         <div className="d-flex justify-content-center"> 
         <div className="bg-light border rounded shadow p-4" style={{ width: '400px' }}> 
-            <h3 className="text-center mb-4"> My SQL Connection</h3>  
+            <h3 className="text-center mb-4"> MySQL Connection</h3> 
             <form onSubmit={formik.handleSubmit} className="form-container">  
+            <div className="form-group">  
+                <label htmlFor="exampleInputEmail1">Connection_Name </label>
+                <input  
+                    type="text"  
+                    className="form-control"  
+                    value={formik.values.connectionname}  
+                    name="connectionname"  
+                    onChange={formik.handleChange('connectionname')}  
+                />   
+                <div className="error">  
+                    {  
+                        formik.touched.connectionname && formik.errors.connectionname  
+                    }  
+                </div>  
+            </div>  
             <div className="form-group">  
                 <label htmlFor="exampleInputEmail1">Host</label>  
                 <input  
@@ -99,7 +114,10 @@ const MySqlForm = () => {
                     }  
                 </div>  
             </div>   
-            <input type="submit" className="btn btn-primary" value={'Submit'}/>  
+            <div className='d-flex justify-content-around w-75 mt-2'>
+            <input type="submit" className="btn btn-primary" value={'Save'}/>  
+            <input type="submit" className="btn btn-danger" value={'Cancel'}/>  
+            </div>
         </form> 
         </div>  
     </div>   

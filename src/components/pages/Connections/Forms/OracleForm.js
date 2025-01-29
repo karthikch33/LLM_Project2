@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'; 
 import { Button} from 'antd';  
+import { Alert } from 'antd';
 import { useFormik } from "formik";
 import * as yup from 'yup'
 
@@ -16,6 +17,7 @@ const OracleForm = () => {
 
     const formik = useFormik({
         initialValues:{
+            connectionname:'',
             dsn:"",
             username:"",
             password:""
@@ -38,12 +40,10 @@ const OracleForm = () => {
                 const data = await response;
      
                 console.log('Success:', data);
-                // Optionally handle success (e.g., show a message or redirect)
                 alert("Connection Successful");
             } catch (error) {
                 console.error('Error:', error);
                 alert("Connection Failed");
-                // Optionally handle error (e.g., show an error message)
             }
         }
     })
@@ -55,7 +55,22 @@ const OracleForm = () => {
             <h3 className="text-center mb-4"> Oracle Connection</h3>  
             <form onSubmit={formik.handleSubmit} className="form-container">  
             <div className="form-group">  
-                <label htmlFor="exampleInputEmail1">dsn</label>  
+                <label htmlFor="exampleInputEmail1">Connection_Name </label>
+                <input  
+                    type="text"  
+                    className="form-control"  
+                    value={formik.values.connectionname}  
+                    name="connectionname"  
+                    onChange={formik.handleChange('connectionname')}  
+                />   
+                <div className="error">  
+                    {  
+                        formik.touched.connectionname && formik.errors.connectionname  
+                    }  
+                </div>  
+            </div>  
+            <div className="form-group">  
+                <label htmlFor="exampleInputEmail1">DSN</label>  
                 <input  
                     type="text"  
                     className="form-control"  
@@ -99,7 +114,10 @@ const OracleForm = () => {
                     }  
                 </div>  
             </div>   
-            <input type="submit" className="btn btn-primary" value={'Submit'}/>  
+            <div className='d-flex justify-content-around w-75 mt-2'>
+            <input type="submit" className="btn btn-primary" value={'Save'}/>  
+            <input type="submit" className="btn btn-danger" value={'Cancel'}/>  
+            </div>
         </form> 
         </div>  
     </div>   

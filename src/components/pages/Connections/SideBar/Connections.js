@@ -7,7 +7,9 @@ import { SiCrehana } from "react-icons/si";
 import { Outlet } from 'react-router-dom';  
 import { SiMysql } from "react-icons/si";
 import { MdInsertDriveFile   } from "react-icons/md";
+import { BsFillEyeFill   } from "react-icons/bs";
 import { SiOracle } from "react-icons/si";
+import { SiEnterprisedb } from "react-icons/si";
 
 
 const { Header, Content, Sider } = Layout;   
@@ -15,36 +17,41 @@ const { Header, Content, Sider } = Layout;
 const items = [  
   {  
     key: 'Erp',  
-    icon: <SiCrehana  className='fs-4'/>,  
+    icon: <SiEnterprisedb  className='fs-4'/>,  
     label: 'ERP',  
-  },  
-  {  
-    key: 'Hana',  
-    icon: <SiCrehana  className='fs-4'/>,  
-    label: 'Hana',  
-  },  
+  },   
   {  
     key: 'extractions',  
     icon: <HiDatabase  className='fs-4' />,  
-    label: 'DATABASE',
+    label: 'Database',
     children:[
+      {  
+        key: 'Hana',  
+        icon: <SiCrehana  className='fs-4'/>,  
+        label: 'HANA',  
+      }, 
       {
         key: 'MySql',
         icon: <SiMysql className='fs-4' />,  
-        label: 'MySql'
+        label: 'MySQL'
       },
       {
         key: 'Oracle',
         icon: <SiOracle className='fs-4' />,  
         label: 'Oracle'
-      }
+      }      
     ]  
   },  
   {  
     key: 'flatfile',  
     icon: <MdInsertDriveFile  className='fs-4' />,  
-    label: 'FLATFILE'  
+    label: 'FlatFile'  
   },    
+  {
+    key: 'view-connections',
+    icon: <BsFillEyeFill className='fs-4' />,  
+    label: 'View Connections'
+  }
 ];
 
 const Connections = () => {  
@@ -70,8 +77,8 @@ const Connections = () => {
         <Sider trigger={null} collapsible collapsed={collapsed}>  
           <div className="fixed logo d-flex align-items-center justify-content-center">  
             <h3 className='text-center text-white fs-5 mb-0 '>  
-              <span className='sm-logo' onClick={returnHome} style={{cursor:'pointer'}}>LLM</span>  
-              <span className='lg-logo' onClick={returnHome} style={{cursor:'pointer'}}>Large Language Model</span>  
+              <span className='sm-logo' onClick={returnHome} style={{cursor:'pointer'}}>C</span>  
+              <span className='lg-logo' onClick={returnHome} style={{cursor:'pointer'}}>Connections</span>  
             </h3>  
           </div>  
           <Menu  

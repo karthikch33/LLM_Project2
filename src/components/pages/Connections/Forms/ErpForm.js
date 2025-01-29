@@ -2,23 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { Button} from 'antd';  
 import { useFormik } from "formik";
 import * as yup from 'yup'
+import { Alert } from 'antd';
 
 import 'bootstrap/dist/css/bootstrap.min.css';  
 
 
 const ErpForm = () => {
-
     let schema = yup.object().shape({
-        address:yup.string().required('Address Required'),
-        port:yup.string().required('Port Required'),
+        ashost:yup.string().required('host Required'),
+        sysnr:yup.string().required('sysnr Required'),
+        client:yup.string().required('client Required'),
         username:yup.string().required('Username Required'),
         password:yup.string().required('Password Required'),
     })
 
     const formik = useFormik({
         initialValues:{
-            address:'',
-            port:"",
+            connectionname:'',
+            ashost:"",
+            sysnr:"",
+            client:"",
             username:"",
             password:""
         },
@@ -40,12 +43,10 @@ const ErpForm = () => {
                 const data = await response;
      
                 console.log('Success:', data);
-                // Optionally handle success (e.g., show a message or redirect)
                 alert("Connection Successful");
             } catch (error) {
                 console.error('Error:', error);
                 alert("Connection Failed");
-                // Optionally handle error (e.g., show an error message)
             }
         }
     })
@@ -53,47 +54,77 @@ const ErpForm = () => {
 
     return (  
         <div className="d-flex justify-content-center"> 
-        <div className="bg-light border rounded shadow p-4" style={{ width: '400px' }}> 
-            <h3 className="text-center mb-4"> ERP Connection</h3>  
+        <div className="bg-light border rounded shadow " style={{ width: '400px', maxHeight:"450px"}}> 
+            <h3 className="text-center mt-4"> SAP Connection</h3>  
             <form onSubmit={formik.handleSubmit} className="form-container">  
             <div className="form-group">  
-                <label htmlFor="exampleInputEmail1">address</label>  
+                <label htmlFor="exampleInputEmail1">Connection_Name </label>
                 <input  
                     type="text"  
                     className="form-control"  
-                    value={formik.values.address}  
-                    name="address"  
-                    onChange={formik.handleChange('address')}  
+                    value={formik.values.connectionname}  
+                    name="connectionname"  
+                    onChange={formik.handleChange('connectionname')}  
                 />   
                 <div className="error">  
                     {  
-                        formik.touched.address && formik.errors.address  
+                        formik.touched.connectionname && formik.errors.connectionname  
                     }  
                 </div>  
             </div>  
             <div className="form-group">  
-                <label htmlFor="exampleInputEmail1">port</label>  
+                <label htmlFor="exampleInputEmail1">Host</label>  
                 <input  
-                type="text"  
-                className="form-control"  
-                value={formik.values.port}  
-                name="port"  
-                onChange={formik.handleChange('port')}   
+                    type="text"  
+                    className="form-control"  
+                    value={formik.values.ashost}  
+                    name="ashost"  
+                    onChange={formik.handleChange('ashost')}  
                 />   
                 <div className="error">  
                     {  
-                        formik.touched.port && formik.errors.port  
+                        formik.touched.ashost && formik.errors.ashost  
+                    }  
+                </div>  
+            </div>  
+            <div className="form-group">  
+                <label htmlFor="exampleInputEmail1">Sysnr</label>  
+                <input  
+                type="text"  
+                className="form-control"  
+                value={formik.values.sysnr}  
+                name="sysnr"  
+                onChange={formik.handleChange('sysnr')}   
+                />   
+                <div className="error">  
+                    {  
+                        formik.touched.sysnr && formik.errors.sysnr  
                     }  
                 </div>  
             </div>   
             <div className="form-group">  
-                <label htmlFor="exampleInputEmail1">username</label>  
+                <label htmlFor="exampleInputEmail1">Client</label>  
                 <input  
-                type="text"  
-                className="form-control"  
-                value={formik.values.username}  
-                name="username"  
-                onChange={formik.handleChange('username')}   
+                    type="password"  
+                    className="form-control"  
+                    value={formik.values.client}  
+                    name="client"  
+                    onChange={formik.handleChange('client')}  
+                />   
+                <div className="error">  
+                    {  
+                        formik.touched.client && formik.errors.client  
+                    }  
+                </div>  
+            </div>   
+            <div className="form-group">  
+                <label htmlFor="exampleInputEmail1">Username</label>  
+                <input  
+                    type="text"  
+                    className="form-control"  
+                    value={formik.values.username}  
+                    name="username"  
+                    onChange={formik.handleChange('username')}  
                 />   
                 <div className="error">  
                     {  
@@ -102,7 +133,7 @@ const ErpForm = () => {
                 </div>  
             </div>   
             <div className="form-group">  
-                <label htmlFor="exampleInputEmail1">password</label>  
+                <label htmlFor="exampleInputEmail1">Password</label>  
                 <input  
                     type="password"  
                     className="form-control"  
@@ -116,11 +147,18 @@ const ErpForm = () => {
                     }  
                 </div>  
             </div>   
-            <input type="submit" className="btn btn-primary" value={'Submit'}/>  
+            <div className='d-flex justify-content-around w-75 mt-2'>
+            <input type="submit" className="btn btn-primary" value={'Save'}/>  
+            <input type="submit" className="btn btn-danger" value={'Cancel'}/>  
+            </div>
         </form> 
         </div>  
     </div>   
     );  
+
+
+
+
 }
 
 export default ErpForm
