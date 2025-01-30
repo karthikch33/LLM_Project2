@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button} from 'antd';  
 import { useFormik } from "formik";
 import * as yup from 'yup'
+import {useLocation} from 'react-router-dom'
 import { Alert } from 'antd';
 
 import 'bootstrap/dist/css/bootstrap.min.css';  
@@ -15,9 +16,12 @@ const MySqlForm = () => {
         password:yup.string().required('Password Required'),
     })
 
+        const location = useLocation()
+        const getConnectionId = location.pathname.split('/')[3] || '';
+
     const formik = useFormik({
         initialValues:{
-            connectionname:"",
+            connectionname: getConnectionId || "",
             host:"",
             username:"",
             password:""
@@ -47,6 +51,15 @@ const MySqlForm = () => {
             }
         }
     })
+
+     useEffect(()=>{
+            if(getConnectionId !== undefined)
+            {
+                formik.values.connectionname = getConnectionId
+            }
+            else{
+            }
+          },[getConnectionId])
 
 
     return (  
@@ -115,7 +128,7 @@ const MySqlForm = () => {
                 </div>  
             </div>   
             <div className='d-flex justify-content-around w-75 mt-2'>
-            <input type="submit" className="btn btn-primary" value={'Save'}/>  
+            <input type="submit" className="btn btn-primary" value={getConnectionId !== '' ? 'Edit' : 'Save'}/>  
             <input type="submit" className="btn btn-danger" value={'Cancel'}/>  
             </div>
         </form> 

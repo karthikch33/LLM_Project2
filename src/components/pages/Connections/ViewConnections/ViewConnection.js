@@ -3,32 +3,37 @@ import React, { useState } from 'react';
 import { Input, Table, Button } from 'antd';  
 import CustomModel from './CustomModel';
 import { Link } from 'react-router-dom';
+import { FaRegEdit } from "react-icons/fa";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { MdEditNote } from "react-icons/md";
+import CustomModelRename from './CustomModelRename';
 
 const ViewConnection = () => {
     const [searchText, setSearchText] = useState('');  
     
     // Example data source  
     const dataSource = [  
-        { key: '1', connectionType: 'Alice', connectionName: 34, username: 'alice34', host: 'host1', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '2', connectionType: 'Bob', connectionName: 45, username: 'bob45', host: 'host2', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '3', connectionType: 'Charlie', connectionName: 29, username: 'charlie29', host: 'host3', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '4', connectionType: 'David', connectionName: 52, username: 'david52', host: 'host4', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '5', connectionType: 'Eva', connectionName: 22, username: 'eva22', host: 'host5', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '6', connectionType: 'Frank', connectionName: 37, username: 'frank37', host: 'host6', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '7', connectionType: 'Grace', connectionName: 41, username: 'grace41', host: 'host7', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '8', connectionType: 'Alice', connectionName: 27, username: 'alice27', host: 'host8', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '9', connectionType: 'Bob', connectionName: 60, username: 'bob60', host: 'host9', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '10', connectionType: 'Charlie', connectionName: 35, username: 'charlie35', host: 'host10', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '11', connectionType: 'Alice', connectionName: 34, username: 'alice34', host: 'host1', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '12', connectionType: 'Bob', connectionName: 45, username: 'bob45', host: 'host2', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '13', connectionType: 'Charlie', connectionName: 29, username: 'charlie29', host: 'host3', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '14', connectionType: 'David', connectionName: 52, username: 'david52', host: 'host4', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '15', connectionType: 'Eva', connectionName: 22, username: 'eva22', host: 'host5', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '16', connectionType: 'Frank', connectionName: 37, username: 'frank37', host: 'host6', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '17', connectionType: 'Grace', connectionName: 41, username: 'grace41', host: 'host7', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '18', connectionType: 'Alice', connectionName: 27, username: 'alice27', host: 'host8', connection_status: 'Active', test_connection: <Button>Test</Button> },  
-        { key: '19', connectionType: 'Bob', connectionName: 60, username: 'bob60', host: 'host9', connection_status: 'Inactive', test_connection: <Button>Test</Button> },  
-        { key: '20', connectionType: 'Charlie', connectionName: 35, username: 'charlie35', host: 'host10', connection_status: 'Active', test_connection: <Button>Test</Button> },  
+        { key: '1', connectionType: 'Oracle', connectionName: 'OracleDB1', username: 'oracle_user1', host: 'oracle_host1', connection_status: 'Active' },  
+        { key: '2', connectionType: 'MySQL', connectionName: 'MySQLDB1', username: 'mysql_user1', host: 'mysql_host1', connection_status: 'Inactive' },  
+        { key: '3', connectionType: 'ERP', connectionName: 'ERP_DB1', username: 'erp_user1', host: 'erp_host1', connection_status: 'Active' },  
+        { key: '4', connectionType: 'HANA', connectionName: 'HANA_DB1', username: 'hana_user1', host: 'hana_host1', connection_status: 'Inactive' },  
+        { key: '5', connectionType: 'Oracle', connectionName: 'OracleDB2', username: 'oracle_user2', host: 'oracle_host2', connection_status: 'Active' },  
+        { key: '6', connectionType: 'MySQL', connectionName: 'MySQLDB2', username: 'mysql_user2', host: 'mysql_host2', connection_status: 'Active' },  
+        { key: '7', connectionType: 'ERP', connectionName: 'ERP_DB2', username: 'erp_user2', host: 'erp_host2', connection_status: 'Inactive' },  
+        { key: '8', connectionType: 'HANA', connectionName: 'HANA_DB2', username: 'hana_user2', host: 'hana_host2', connection_status: 'Active' },  
+        { key: '9', connectionType: 'Oracle', connectionName: 'OracleDB3', username: 'oracle_user3', host: 'oracle_host3', connection_status: 'Active' },  
+        { key: '10', connectionType: 'MySQL', connectionName: 'MySQLDB3', username: 'mysql_user3', host: 'mysql_host3', connection_status: 'Inactive' },  
+        { key: '11', connectionType: 'Oracle', connectionName: 'OracleDB1', username: 'oracle_user1', host: 'oracle_host1', connection_status: 'Active' },  
+        { key: '12', connectionType: 'MySQL', connectionName: 'MySQLDB1', username: 'mysql_user1', host: 'mysql_host1', connection_status: 'Inactive' },  
+        { key: '13', connectionType: 'ERP', connectionName: 'ERP_DB1', username: 'erp_user1', host: 'erp_host1', connection_status: 'Active' },  
+        { key: '14', connectionType: 'HANA', connectionName: 'HANA_DB1', username: 'hana_user1', host: 'hana_host1', connection_status: 'Inactive' },  
+        { key: '15', connectionType: 'Oracle', connectionName: 'OracleDB2', username: 'oracle_user2', host: 'oracle_host2', connection_status: 'Active' },  
+        { key: '16', connectionType: 'MySQL', connectionName: 'MySQLDB2', username: 'mysql_user2', host: 'mysql_host2', connection_status: 'Active' },  
+        { key: '17', connectionType: 'ERP', connectionName: 'ERP_DB2', username: 'erp_user2', host: 'erp_host2', connection_status: 'Inactive' },  
+        { key: '18', connectionType: 'HANA', connectionName: 'HANA_DB2', username: 'hana_user2', host: 'hana_host2', connection_status: 'Active' },  
+        { key: '19', connectionType: 'Oracle', connectionName: 'OracleDB3', username: 'oracle_user3', host: 'oracle_host3', connection_status: 'Active' },  
+        { key: '20', connectionType: 'MySQL', connectionName: 'MySQLDB3', username: 'mysql_user3', host: 'mysql_host3', connection_status: 'Inactive' },  
+    
     ];  
 
     const columns = [  
@@ -38,15 +43,15 @@ const ViewConnection = () => {
             key: 'key',  
         },  
         {  
-            title: 'Connection Type',  
-            dataIndex: 'connection_type',  
-            key: 'connection_type',  
-        },  
-        {  
             title: 'Connection Name',  
             dataIndex: 'connection_name',  
             key: 'connection_name',  
-        },  
+        },
+        {  
+            title: 'Connection Type',  
+            dataIndex: 'connection_type',  
+            key: 'connection_type',  
+        },   
         {  
             title: 'Username',  
             dataIndex: 'username',  
@@ -62,11 +67,16 @@ const ViewConnection = () => {
             dataIndex: 'connection_status',  
             key: 'connection_status',  
             render: (status) => ( 
-                <div style={{ display: 'flex', alignItems: 'center' }}>  
+                <div style={{ display: 'flex', alignItems: 'center', marginLeft:'18px' }}>  
                 <span className={`circle ${status === 'Active' ? 'green' : 'red'}`}></span>  
                 <p className='mb-2 ml-2'>{status}</p>  
                 </div>  
             ), 
+        },  
+        {  
+            title: 'Options',  
+            dataIndex: 'delete',  
+            key: 'delete',  
         },  
         {  
             title: 'Edit',  
@@ -74,36 +84,57 @@ const ViewConnection = () => {
             key: 'edit',  
         },  
         {  
-            title: 'Delete',  
-            dataIndex: 'delete',  
-            key: 'delete',  
-        },  
-        {  
             title: 'Test Connection',  
             dataIndex: 'test_connection',  
             key: 'test_connection',  
-        }  
+        }
     ];  
 
-    const [data ,setData] = useState();
+    const [data ,setData] = useState({
+        connectionName: undefined
+    });
 
 
     const connections = dataSource.map(field => ({  
-        key: field.key,  
+        key:
+        <div style={{display:'flex',justifyContent:'center',gap:"3px"}}>
+        <span>{field.key}</span>
+        </div>,  
         connection_type: field.connectionType,  
-        connection_name: field.connectionName,  
+        connection_name: 
+        <Link>
+        {field.connectionName}
+        </Link>,  
         username: field.username,  
         host: field.host,  
-        connection_status: field.connection_status,  
-        edit: 
+        connection_status: field.connection_status, 
+        edit: <div style={{display:'flex',justifyContent:'center',gap:"3px"}}>
+        <Link to={`/connections/${field.connectionType}/${field.connectionName}`}>         
+            <Button >Edit
+            </Button>
+            </Link>
+            </div>,
+        delete: 
+        <div style={{display:'flex',justifyContent:'center',gap:"10px"}}>
+        
+         <Button 
+        onClick={()=>{
+            showModal(field)
+        }}
+        ><MdOutlineDeleteOutline /></Button>
         <Button
-                onClick={()=>{
-                    showModal(field)
-                }}
-            >Edit
-            </Button>,
-        delete: <Button>Delete</Button>,  
-        test_connection: field.test_connection
+       
+       onClick={()=>{
+           showModal2(field)
+       }}
+       >
+       <FaRegEdit />
+       </Button>
+        </div>,  
+        test_connection: 
+        <div style={{display:'flex',justifyContent:'center',gap:"3px"}}>
+        <Button>Test</Button>
+        </div>
     }));  
 
 
@@ -117,11 +148,17 @@ const ViewConnection = () => {
     });  
 
     const [open, setOpen] = useState(false);
+    const [open2, setOpen2] = useState(false);
 
 
     const showModal = (field) => {
         setOpen(true);
-        setData(field)
+        setData(field);
+      };
+
+    const showModal2 = (field) => {
+        setOpen2(true);
+        setData(field);
       };
 
 
@@ -129,12 +166,17 @@ const ViewConnection = () => {
         setOpen(false);
       };
 
-   
+      const hideModal2 = () => {
+        setOpen2(false);
+      };
 
     return (  
-        <div className="w-100">  
+        <div className="w-100">     
             {/* Search Input */}  
-            <div className="d-flex justify-content-end mb-2">  
+            <div className="d-flex justify-content-between mb-2"> 
+                <div>
+                   <Link ><label style={{cursor:'pointer',fontSize:"17px"}}>Connections</label></Link> {`/`}  <Link ><label style={{cursor:'pointer',fontSize:"17px"}}>Tables</label></Link>
+                </div> 
                 <Input  
                     placeholder="Search by Type, Username or Host"  
                     value={searchText}  
@@ -146,16 +188,22 @@ const ViewConnection = () => {
                 columns={columns}  
                 dataSource={filteredData} // Use the filtered data  
                 pagination={{  
-                    pageSize: 4,  
+                    pageSize: 10,  
                 }}  
             />  
             <CustomModel
-            //  title={ <> Edit { customername !== "No" ? <span style={{ color: "red",display:"inline" }} 
-            //  title={ <> Edit { customername !== "No" ? <span style={{ color: "red",display:"inline" }} 
-            //  className=''>"  {customername} "  </span>:"" } Status </>}
-             title={<>Edit </>}
+             title={<>Delete { data.connectionName !== undefined ?  <span style={{ color: "red",display:"inline" }}>"{` `} {data.connectionName}{` `} "</span>:''} {` `}Connection</>}
               hideModal={hideModal} 
               open={open}
+              data={data}
+              performAction = {()=>{}}
+            //    performAction={()=>activeState(customerId,customername,customerrole)}
+            />
+
+            <CustomModelRename
+             title={<>Rename { data.connectionName !== undefined ?  <span style={{ color: "red",display:"inline" }}>"{` `} {data.connectionName}{` `} "</span>:''} {` `}Connection</>}
+              hideModal={hideModal2} 
+              open={open2}
               data={data}
               performAction = {()=>{}}
             //    performAction={()=>activeState(customerId,customername,customerrole)}

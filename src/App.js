@@ -35,9 +35,13 @@ function App() {
             {/* Connections Routes */}
             <Route path="/connections" element={<Connections/>}>
               <Route path='mysql' element={<MySqlForm/>}/>
+              <Route path='mysql/:id' element={<MySqlForm/>}/>
               <Route path='hana' element={<HanaForm/>}/>
+              <Route path='hana/:id' element={<HanaForm/>}/>
               <Route path='erp' element={<ErpForm/>}/>
+              <Route path='erp/:id' element={<ErpForm/>}/>
               <Route path='oracle' element={<OracleForm/>}/>
+              <Route path='oracle/:id' element={<OracleForm/>}/>
               <Route path='flatfile' element={<FlatFile/>} />
               <Route path='view-connections' element={<ViewConnection/>} />
             </Route>

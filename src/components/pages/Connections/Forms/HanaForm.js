@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button} from 'antd';  
 import { useFormik } from "formik";
 import * as yup from 'yup'
+import {useLocation} from 'react-router-dom'
 import { Alert } from 'antd';
 
 import 'bootstrap/dist/css/bootstrap.min.css';  
@@ -14,15 +15,27 @@ const HanaForm = () => {
             username:yup.string().required('Username Required'),
             password:yup.string().required('Password Required'),
         })
+
+        const location = useLocation()
+        const getConnectionId = location.pathname.split('/')[3] || '';
     
         const [alert,setAlert] = useState({
     
         });
         const [status,setStatus] = useState('success');
+
+         useEffect(()=>{
+                    if(getConnectionId !== undefined)
+                    {
+                        formik.values.connectionname = getConnectionId
+                    }
+                    else{
+                    }
+                  },[getConnectionId])
     
         const formik = useFormik({
             initialValues:{
-                connectionname:'',
+                connectionname:getConnectionId || '',
                 address:'',
                 port:"",
                 username:"",
@@ -140,7 +153,7 @@ const HanaForm = () => {
                     </div>  
                 </div>   
                 <div className='d-flex justify-content-around w-75 mt-2'>
-                <input type="submit" className="btn btn-primary" value={'Save'}/>  
+                <input type="submit" className="btn btn-primary" value={getConnectionId !== '' ? 'Edit' : 'Save'}/>  
                 <input type="submit" className="btn btn-danger" value={'Cancel'}/>  
                 </div> 
             </form> 

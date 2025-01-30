@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'; 
 import { Button} from 'antd';  
 import { useFormik } from "formik";
+import {useLocation} from 'react-router-dom'
 import * as yup from 'yup'
 import { Alert } from 'antd';
 
@@ -16,9 +17,12 @@ const ErpForm = () => {
         password:yup.string().required('Password Required'),
     })
 
+    const location = useLocation()
+    const getConnectionId = location.pathname.split('/')[3] || '';
+
     const formik = useFormik({
         initialValues:{
-            connectionname:'',
+            connectionname:getConnectionId || '',
             ashost:"",
             sysnr:"",
             client:"",
@@ -50,6 +54,17 @@ const ErpForm = () => {
             }
         }
     })
+
+   
+    
+    useEffect(()=>{
+        if(getConnectionId !== undefined)
+        {
+            formik.values.connectionname = getConnectionId
+        }
+        else{
+        }
+      },[getConnectionId])
 
 
     return (  
@@ -148,7 +163,7 @@ const ErpForm = () => {
                 </div>  
             </div>   
             <div className='d-flex justify-content-around w-75 mt-2'>
-            <input type="submit" className="btn btn-primary" value={'Save'}/>  
+            <input type="submit" className="btn btn-primary" value={getConnectionId !== '' ? 'Edit' : 'Save'}/>  
             <input type="submit" className="btn btn-danger" value={'Cancel'}/>  
             </div>
         </form> 
